@@ -733,7 +733,7 @@ export function OverviewTab({ taskId }: { taskId: string }) {
                 {t("Tested {tested} / in scope {total}", { tested: coverage.tested, total: coverage.denominator })}
               </span>
             </div>
-            {coverage.pct != null && <Progress value={Math.round(coverage.pct * 100)} />}
+            {coverage.pct != null && <Progress value={Math.round(coverage.pct * 100)} aria-label={t("Asset test coverage")} />}
             {coverage.by_type.length > 0 && (
               <div className="flex flex-wrap gap-1.5 text-xs">
                 {coverage.by_type.map((b) => (
@@ -963,7 +963,7 @@ export function OverviewTab({ taskId }: { taskId: string }) {
             <div className="text-xs text-muted-foreground">
               {t("Goals {met}/{total}", { met: task?.goals_met ?? 0, total: task?.goals_total ?? 0 })}
             </div>
-            <Progress value={goalsPct} className="mt-2" />
+            <Progress value={goalsPct} className="mt-2" aria-label={t("Goals {met}/{total}", { met: task?.goals_met ?? 0, total: task?.goals_total ?? 0 })} />
           </div>
           {task?.completed_unix && task.completed_unix > 0 ? (
             <div>

@@ -2012,7 +2012,7 @@ function TaskArchivesPanel({ onChanged }: { onChanged: () => void }) {
                     <TableCell>
                       <div className="flex min-w-0 flex-col gap-1.5">
                         <ArchiveStateBadge state={archive.state} />
-                        {processing && <Progress value={archive.progress} />}
+                        {processing && <Progress value={archive.progress} aria-label={t("Archiving")} />}
                         {archive.error && (
                           <p className="text-destructive text-xs [overflow-wrap:anywhere]">{archive.error}</p>
                         )}
