@@ -482,3 +482,16 @@ func TestFindingTitleFallsBackForBlankNames(t *testing.T) {
 		t.Fatalf("title = %q, want default fallback", got)
 	}
 }
+
+func TestFindingExportsAreStableForEqualTimestamps(t *testing.T) {
+	first := &db.DBFinding{ID: 10, Severity: "high", Name: "First"}
+	second := &db.DBFinding{ID: 11, Severity: "high", Name: "Second"}
+	a := []*db.DBFinding{first, second}
+	b := []*db.DBFinding{second, first}
+	if !bytes.Equal(FindingsCSV(a), FindingsCSV(b)) {
+		t.Fatal("CSV order changed when only the input order changed")
+	}
+	if FindingsMarkdown(a, time.Time{}) != FindingsMarkdown(b, time.Time{}) {
+		t.Fatal("Markdown order changed when only the input order changed")
+	}
+}

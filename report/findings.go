@@ -27,6 +27,9 @@ func sortFindingsForExport(fs []*db.DBFinding) {
 		if ri != rj {
 			return ri < rj // smaller sevRank means more severe
 		}
+		if fs[i].CreatedAt.Equal(fs[j].CreatedAt) {
+			return fs[i].ID > fs[j].ID
+		}
 		return fs[i].CreatedAt.After(fs[j].CreatedAt)
 	})
 }
